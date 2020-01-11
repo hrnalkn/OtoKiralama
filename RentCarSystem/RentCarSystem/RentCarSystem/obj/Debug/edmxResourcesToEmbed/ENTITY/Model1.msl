@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AracKiralamaModelStoreContainer" CdmEntityContainer="AracKiralamaEntities">
+    <EntitySetMapping Name="AraclarListesi">
+      <EntityTypeMapping TypeName="AracKiralamaModel.AraclarListesi">
+        <MappingFragment StoreEntitySet="AraclarListesi">
+          <ScalarProperty Name="Durum" ColumnName="Durum" />
+          <ScalarProperty Name="KiraUcreti" ColumnName="KiraUcreti" />
+          <ScalarProperty Name="Yakıt" ColumnName="Yakıt" />
+          <ScalarProperty Name="Vites" ColumnName="Vites" />
+          <ScalarProperty Name="Km" ColumnName="Km" />
+          <ScalarProperty Name="Model_Yıl" ColumnName="Model_Yıl" />
+          <ScalarProperty Name="Seri" ColumnName="Seri" />
+          <ScalarProperty Name="Marka" ColumnName="Marka" />
+          <ScalarProperty Name="Plaka" ColumnName="Plaka" />
+          <ScalarProperty Name="AracID" ColumnName="AracID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GenelToplam">
+      <EntityTypeMapping TypeName="AracKiralamaModel.GenelToplam">
+        <MappingFragment StoreEntitySet="GenelToplam">
+          <ScalarProperty Name="GenelToplamUcret" ColumnName="GenelToplamUcret" />
+          <ScalarProperty Name="GenelToplamID" ColumnName="GenelToplamID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KiralamaIslemleri">
+      <EntityTypeMapping TypeName="AracKiralamaModel.KiralamaIslemleri">
+        <MappingFragment StoreEntitySet="KiralamaIslemleri">
+          <ScalarProperty Name="ToplamUcret" ColumnName="ToplamUcret" />
+          <ScalarProperty Name="AracTeslimTarihi" ColumnName="AracTeslimTarihi" />
+          <ScalarProperty Name="AracCıkısTarihi" ColumnName="AracCıkısTarihi" />
+          <ScalarProperty Name="MusteriID" ColumnName="MusteriID" />
+          <ScalarProperty Name="AracID" ColumnName="AracID" />
+          <ScalarProperty Name="IslemID" ColumnName="IslemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kullanıcılar">
+      <EntityTypeMapping TypeName="AracKiralamaModel.Kullanıcılar">
+        <MappingFragment StoreEntitySet="Kullanıcılar">
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+          <ScalarProperty Name="KullanıcıAdı" ColumnName="KullanıcıAdı" />
+          <ScalarProperty Name="KullanıcıID" ColumnName="KullanıcıID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Musteriler">
+      <EntityTypeMapping TypeName="AracKiralamaModel.Musteriler">
+        <MappingFragment StoreEntitySet="Musteriler">
+          <ScalarProperty Name="EhliyetNo" ColumnName="EhliyetNo" />
+          <ScalarProperty Name="Cinsiyet" ColumnName="Cinsiyet" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="TcNO" ColumnName="TcNO" />
+          <ScalarProperty Name="MusteriID" ColumnName="MusteriID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

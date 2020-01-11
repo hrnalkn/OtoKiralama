@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AracKiralamaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AraclarListesi">
+          <Key>
+            <PropertyRef Name="AracID" />
+          </Key>
+          <Property Name="AracID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Plaka" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Marka" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Seri" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Model_Yıl" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Km" Type="int" Nullable="false" />
+          <Property Name="Vites" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Yakıt" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="KiraUcreti" Type="int" Nullable="false" />
+          <Property Name="Durum" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GenelToplam">
+          <Key>
+            <PropertyRef Name="GenelToplamID" />
+          </Key>
+          <Property Name="GenelToplamID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GenelToplamUcret" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KiralamaIslemleri">
+          <Key>
+            <PropertyRef Name="IslemID" />
+          </Key>
+          <Property Name="IslemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AracID" Type="int" Nullable="false" />
+          <Property Name="MusteriID" Type="int" Nullable="false" />
+          <Property Name="AracCıkısTarihi" Type="datetime" Nullable="false" />
+          <Property Name="AracTeslimTarihi" Type="datetime" Nullable="false" />
+          <Property Name="ToplamUcret" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kullanıcılar">
+          <Key>
+            <PropertyRef Name="KullanıcıID" />
+          </Key>
+          <Property Name="KullanıcıID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullanıcıAdı" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Musteriler">
+          <Key>
+            <PropertyRef Name="MusteriID" />
+          </Key>
+          <Property Name="MusteriID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TcNO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Soyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adres" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cinsiyet" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="EhliyetNo" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_KiralamaIslemleri_AraclarListesi">
+          <End Role="AraclarListesi" Type="Self.AraclarListesi" Multiplicity="1" />
+          <End Role="KiralamaIslemleri" Type="Self.KiralamaIslemleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AraclarListesi">
+              <PropertyRef Name="AracID" />
+            </Principal>
+            <Dependent Role="KiralamaIslemleri">
+              <PropertyRef Name="AracID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KiralamaIslemleri_Musteriler">
+          <End Role="Musteriler" Type="Self.Musteriler" Multiplicity="1" />
+          <End Role="KiralamaIslemleri" Type="Self.KiralamaIslemleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteriler">
+              <PropertyRef Name="MusteriID" />
+            </Principal>
+            <Dependent Role="KiralamaIslemleri">
+              <PropertyRef Name="MusteriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AracKiralamaModelStoreContainer">
+          <EntitySet Name="AraclarListesi" EntityType="Self.AraclarListesi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GenelToplam" EntityType="Self.GenelToplam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KiralamaIslemleri" EntityType="Self.KiralamaIslemleri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanıcılar" EntityType="Self.Kullanıcılar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Musteriler" EntityType="Self.Musteriler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_KiralamaIslemleri_AraclarListesi" Association="Self.FK_KiralamaIslemleri_AraclarListesi">
+            <End Role="AraclarListesi" EntitySet="AraclarListesi" />
+            <End Role="KiralamaIslemleri" EntitySet="KiralamaIslemleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KiralamaIslemleri_Musteriler" Association="Self.FK_KiralamaIslemleri_Musteriler">
+            <End Role="Musteriler" EntitySet="Musteriler" />
+            <End Role="KiralamaIslemleri" EntitySet="KiralamaIslemleri" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AracKiralamaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AracKiralamaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AraclarListesi" EntityType="AracKiralamaModel.AraclarListesi" />
+          <EntitySet Name="GenelToplam" EntityType="AracKiralamaModel.GenelToplam" />
+          <EntitySet Name="KiralamaIslemleri" EntityType="AracKiralamaModel.KiralamaIslemleri" />
+          <EntitySet Name="Kullanıcılar" EntityType="AracKiralamaModel.Kullanıcılar" />
+          <EntitySet Name="Musteriler" EntityType="AracKiralamaModel.Musteriler" />
+          <AssociationSet Name="FK_KiralamaIslemleri_AraclarListesi" Association="AracKiralamaModel.FK_KiralamaIslemleri_AraclarListesi">
+            <End Role="AraclarListesi" EntitySet="AraclarListesi" />
+            <End Role="KiralamaIslemleri" EntitySet="KiralamaIslemleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KiralamaIslemleri_Musteriler" Association="AracKiralamaModel.FK_KiralamaIslemleri_Musteriler">
+            <End Role="Musteriler" EntitySet="Musteriler" />
+            <End Role="KiralamaIslemleri" EntitySet="KiralamaIslemleri" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AraclarListesi">
+          <Key>
+            <PropertyRef Name="AracID" />
+          </Key>
+          <Property Name="AracID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Plaka" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Marka" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Seri" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Model_Yıl" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Km" Type="Int32" Nullable="false" />
+          <Property Name="Vites" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Yakıt" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="KiraUcreti" Type="Int32" Nullable="false" />
+          <Property Name="Durum" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KiralamaIslemleri" Relationship="AracKiralamaModel.FK_KiralamaIslemleri_AraclarListesi" FromRole="AraclarListesi" ToRole="KiralamaIslemleri" />
+        </EntityType>
+        <EntityType Name="GenelToplam">
+          <Key>
+            <PropertyRef Name="GenelToplamID" />
+          </Key>
+          <Property Name="GenelToplamID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenelToplamUcret" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KiralamaIslemleri">
+          <Key>
+            <PropertyRef Name="IslemID" />
+          </Key>
+          <Property Name="IslemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AracID" Type="Int32" Nullable="false" />
+          <Property Name="MusteriID" Type="Int32" Nullable="false" />
+          <Property Name="AracCıkısTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AracTeslimTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ToplamUcret" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AraclarListesi" Relationship="AracKiralamaModel.FK_KiralamaIslemleri_AraclarListesi" FromRole="KiralamaIslemleri" ToRole="AraclarListesi" />
+          <NavigationProperty Name="Musteriler" Relationship="AracKiralamaModel.FK_KiralamaIslemleri_Musteriler" FromRole="KiralamaIslemleri" ToRole="Musteriler" />
+        </EntityType>
+        <EntityType Name="Kullanıcılar">
+          <Key>
+            <PropertyRef Name="KullanıcıID" />
+          </Key>
+          <Property Name="KullanıcıID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullanıcıAdı" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sifre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Musteriler">
+          <Key>
+            <PropertyRef Name="MusteriID" />
+          </Key>
+          <Property Name="MusteriID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TcNO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Soyad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telefon" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adres" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cinsiyet" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="EhliyetNo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="KiralamaIslemleri" Relationship="AracKiralamaModel.FK_KiralamaIslemleri_Musteriler" FromRole="Musteriler" ToRole="KiralamaIslemleri" />
+        </EntityType>
+        <Association Name="FK_KiralamaIslemleri_AraclarListesi">
+          <End Type="AracKiralamaModel.AraclarListesi" Role="AraclarListesi" Multiplicity="1" />
+          <End Type="AracKiralamaModel.KiralamaIslemleri" Role="KiralamaIslemleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AraclarListesi">
+              <PropertyRef Name="AracID" />
+            </Principal>
+            <Dependent Role="KiralamaIslemleri">
+              <PropertyRef Name="AracID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KiralamaIslemleri_Musteriler">
+          <End Type="AracKiralamaModel.Musteriler" Role="Musteriler" Multiplicity="1" />
+          <End Type="AracKiralamaModel.KiralamaIslemleri" Role="KiralamaIslemleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteriler">
+              <PropertyRef Name="MusteriID" />
+            </Principal>
+            <Dependent Role="KiralamaIslemleri">
+              <PropertyRef Name="MusteriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AracKiralamaModelStoreContainer" CdmEntityContainer="AracKiralamaEntities">
+          <EntitySetMapping Name="AraclarListesi">
+            <EntityTypeMapping TypeName="AracKiralamaModel.AraclarListesi">
+              <MappingFragment StoreEntitySet="AraclarListesi">
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+                <ScalarProperty Name="KiraUcreti" ColumnName="KiraUcreti" />
+                <ScalarProperty Name="Yakıt" ColumnName="Yakıt" />
+                <ScalarProperty Name="Vites" ColumnName="Vites" />
+                <ScalarProperty Name="Km" ColumnName="Km" />
+                <ScalarProperty Name="Model_Yıl" ColumnName="Model_Yıl" />
+                <ScalarProperty Name="Seri" ColumnName="Seri" />
+                <ScalarProperty Name="Marka" ColumnName="Marka" />
+                <ScalarProperty Name="Plaka" ColumnName="Plaka" />
+                <ScalarProperty Name="AracID" ColumnName="AracID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GenelToplam">
+            <EntityTypeMapping TypeName="AracKiralamaModel.GenelToplam">
+              <MappingFragment StoreEntitySet="GenelToplam">
+                <ScalarProperty Name="GenelToplamUcret" ColumnName="GenelToplamUcret" />
+                <ScalarProperty Name="GenelToplamID" ColumnName="GenelToplamID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KiralamaIslemleri">
+            <EntityTypeMapping TypeName="AracKiralamaModel.KiralamaIslemleri">
+              <MappingFragment StoreEntitySet="KiralamaIslemleri">
+                <ScalarProperty Name="ToplamUcret" ColumnName="ToplamUcret" />
+                <ScalarProperty Name="AracTeslimTarihi" ColumnName="AracTeslimTarihi" />
+                <ScalarProperty Name="AracCıkısTarihi" ColumnName="AracCıkısTarihi" />
+                <ScalarProperty Name="MusteriID" ColumnName="MusteriID" />
+                <ScalarProperty Name="AracID" ColumnName="AracID" />
+                <ScalarProperty Name="IslemID" ColumnName="IslemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanıcılar">
+            <EntityTypeMapping TypeName="AracKiralamaModel.Kullanıcılar">
+              <MappingFragment StoreEntitySet="Kullanıcılar">
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="KullanıcıAdı" ColumnName="KullanıcıAdı" />
+                <ScalarProperty Name="KullanıcıID" ColumnName="KullanıcıID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Musteriler">
+            <EntityTypeMapping TypeName="AracKiralamaModel.Musteriler">
+              <MappingFragment StoreEntitySet="Musteriler">
+                <ScalarProperty Name="EhliyetNo" ColumnName="EhliyetNo" />
+                <ScalarProperty Name="Cinsiyet" ColumnName="Cinsiyet" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="TcNO" ColumnName="TcNO" />
+                <ScalarProperty Name="MusteriID" ColumnName="MusteriID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

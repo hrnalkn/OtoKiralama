@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="814af57537ff497c8fe38bc54d3fd6e8" Name="Diagram1" ZoomLevel="63">
+        <EntityTypeShape EntityType="AracKiralamaModel.AraclarListesi" Width="1.5" PointX="0.75" PointY="4.875" />
+        <EntityTypeShape EntityType="AracKiralamaModel.GenelToplam" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AracKiralamaModel.KiralamaIslemleri" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="AracKiralamaModel.Kullanıcılar" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AracKiralamaModel.Musteriler" Width="1.5" PointX="0.75" PointY="1" />
+        <AssociationConnector Association="AracKiralamaModel.FK_KiralamaIslemleri_AraclarListesi" />
+        <AssociationConnector Association="AracKiralamaModel.FK_KiralamaIslemleri_Musteriler" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
